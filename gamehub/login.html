@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub - Connexion</title>
+    <link href="" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">GameHub</a>
+            <div class="ms-auto">
+                <a href="index.html" class="btn btn-outline-light btn-sm me-2">Accueil</a>
+                <a href="register.html" class="btn btn-primary btn-sm">Inscription</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-5">
+                <div class="card shadow">
+                    <div class="card-body p-4">
+                        <h1 class="h3 mb-4 text-center">Connexion</h1>
+
+                        <form action="login.php" method="post">
+                            <div class="mb-3">
+                                <label for="identifier" class="form-label">Login ou adresse email</label>
+                                <input type="text" class="form-control" id="identifier" name="identifier" required>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Se connecter</button>
+                            </div>
+                        </form>
+
+                        <hr class="my-4">
+
+                        <p class="text-center mb-0">
+                            Pas encore de compte ?
+                            <a href="register.html">Inscrivez-vous ici</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-3">
+        <p class="mb-0">GameHub - Connexion utilisateur</p>
+    </footer>
+
+    <script src=""></script>
+</body>
+</html>
