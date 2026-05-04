@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,7 +13,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">GameHub</a>
+            <a class="navbar-brand fw-bold" href="index.php">GameHub</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -19,14 +22,20 @@
             <div class="collapse navbar-collapse" id="menuNavbar">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Accueil</a>
+                        <a class="nav-link active" href="index.php">Accueil</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="register.html">Inscription</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">Connexion</a>
-                    </li>
+                    <?php if (!isset($_SESSION['login'])): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="register.html">Inscription</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Connexion</a>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php">Déconnexion</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -34,14 +43,20 @@
 
     <header class="py-5 bg-secondary-subtle text-dark">
         <div class="container text-center">
-            <h1 class="display-4 fw-bold">Bienvenue sur GameHub</h1>
+            <?php if (isset($_SESSION['login'])): ?>
+                <h1 class="display-4 fw-bold">Bonjour <?php echo htmlspecialchars($_SESSION['login']); ?></h1>
+            <?php else: ?>
+                <h1 class="display-4 fw-bold">Bienvenue sur GameHub</h1>
+            <?php endif; ?>
             <p class="lead mt-3">
                 Découvrez une sélection de jeux vidéo et créez votre compte pour accéder à votre futur espace personnel.
             </p>
-            <div class="mt-4">
-                <a href="register.html" class="btn btn-primary me-2">S'inscrire</a>
-                <a href="login.html" class="btn btn-outline-dark">Se connecter</a>
-            </div>
+            <?php if (!isset($_SESSION['login'])): ?>
+                <div class="mt-4">
+                    <a href="register.html" class="btn btn-primary me-2">S'inscrire</a>
+                    <a href="login.html" class="btn btn-outline-dark">Se connecter</a>
+                </div>
+            <?php endif; ?>
         </div>
     </header>
 
