@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'db.php';
 
 $error = '';
 
@@ -12,9 +13,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif (empty($password)) {
         $error = "Le champ mot de passe est requis.";
     } else {
-        $_SESSION['login'] = $identifier;
-        header("Location: index.php");
-        exit;
+        try {
+            $stmt = $pdo->prepare("SELECT id, login, password FROM users WHERE login = ? OR email = ?");
+            $stmt->execute([$identifier, $identifier]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['login'] = $user['login'];
+                header("Location: index.php");
+                exit;
+            } else {
+                $error = "Identifiant ou mot de passe incorrect.";
+            }
+        } catch (PDOException $e) {
+            $error = "Erreur lors de la connexion : " . $e->getMessage();
+        }
     }
 }
 ?>
